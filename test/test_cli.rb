@@ -5,8 +5,8 @@ require "test_helper"
 class TestCLI < Minitest::Test
   def test_init_command
     with_temp_dir do
-      assert_output(/Created/) { Castled::CLI.run(%w[init]) }
-      assert File.exist?(Castled::Config::CONFIG_FILENAME)
+      assert_output(/Created/) { SimpleBackup::CLI.run(%w[init]) }
+      assert File.exist?(SimpleBackup::Config::CONFIG_FILENAME)
     end
   end
 
@@ -16,7 +16,7 @@ class TestCLI < Minitest::Test
       File.write(source, "content")
       write_config(dir, backup_paths: [source], destination: "backups")
 
-      assert_output(/Backup created/) { Castled::CLI.run(%w[backup]) }
+      assert_output(/Backup created/) { SimpleBackup::CLI.run(%w[backup]) }
       assert Dir.glob("backups/test_backup_*").any?
     end
   end
@@ -27,11 +27,11 @@ class TestCLI < Minitest::Test
       File.write(source, "before")
       write_config(dir, backup_paths: [source], destination: "backups")
 
-      Castled::CLI.run(%w[backup])
+      SimpleBackup::CLI.run(%w[backup])
       File.write(source, "after")
 
       output = capture_io do
-        Castled::CLI.run(%w[restore 1 --dry-run --diff])
+        SimpleBackup::CLI.run(%w[restore 1 --dry-run --diff])
       end
 
       assert_includes output[0], "Dry run complete"
@@ -43,14 +43,14 @@ class TestCLI < Minitest::Test
 
   def test_restore_diff_requires_dry_run
     err = capture_io do
-      assert_raises(SystemExit) { Castled::CLI.run(%w[restore --diff]) }
+      assert_raises(SystemExit) { SimpleBackup::CLI.run(%w[restore --diff]) }
     end[1]
 
     assert_includes err, "--diff requires --dry-run"
   end
 
   def test_unknown_command_exits_with_error
-    err = capture_io { assert_raises(SystemExit) { Castled::CLI.run(%w[unknown]) } }[1]
+    err = capture_io { assert_raises(SystemExit) { SimpleBackup::CLI.run(%w[unknown]) } }[1]
     assert_includes err, "Unknown command"
   end
 end

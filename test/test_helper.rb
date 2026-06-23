@@ -5,9 +5,9 @@ $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "minitest/autorun"
 require "tmpdir"
 require "fileutils"
-require "castled"
+require "simple_backup"
 
-module Castled
+module SimpleBackup
   module TestHelpers
     def with_temp_dir
       Dir.mktmpdir do |dir|
@@ -18,7 +18,7 @@ module Castled
     def write_config(dir, backup_name: "test_backup", backup_paths: [], destination: "backups")
       paths = backup_paths.map { |p| "  - #{p}" }.join("\n")
       File.write(
-        File.join(dir, Castled::Config::CONFIG_FILENAME),
+        File.join(dir, SimpleBackup::Config::CONFIG_FILENAME),
         <<~YAML
           backup_name: #{backup_name}
           backup_paths:
@@ -31,5 +31,5 @@ module Castled
 end
 
 class Minitest::Test
-  include Castled::TestHelpers
+  include SimpleBackup::TestHelpers
 end

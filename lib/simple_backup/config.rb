@@ -3,7 +3,7 @@
 require "yaml"
 require "pathname"
 
-module Castled
+module SimpleBackup
   class Config
     CONFIG_FILENAME = "config.yml"
 
