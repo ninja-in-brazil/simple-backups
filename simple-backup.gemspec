@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "lib/simple_backups/version"
+require_relative "lib/simple_backup/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "SimpleBackups"
-  spec.version       = SimpleBackups::VERSION
-  spec.authors       = ["SimpleBackups"]
+  spec.name          = "simple-backup"
+  spec.version       = SimpleBackup::VERSION
+  spec.authors       = ["SimpleBackup"]
   spec.email         = ["noreply@example.com"]
 
   spec.summary       = "Simple backups via simple-backup CLI"
@@ -19,13 +19,13 @@ Gem::Specification.new do |spec|
   spec.files = Dir.chdir(__dir__) do
     %w[
       README.md
-      SimpleBackups.gemspec
+      simple-backup.gemspec
       exe/simple-backup
-      lib/simple_backups.rb
-      lib/simple_backups/backup.rb
-      lib/simple_backups/cli.rb
-      lib/simple_backups/config.rb
-      lib/simple_backups/version.rb
+      lib/simple_backup.rb
+      lib/simple_backup/backup.rb
+      lib/simple_backup/cli.rb
+      lib/simple_backup/config.rb
+      lib/simple_backup/version.rb
     ].select { |file| File.file?(file) }
   end
 

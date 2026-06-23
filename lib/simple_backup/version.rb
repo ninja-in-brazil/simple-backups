@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module SimpleBackups
+module SimpleBackup
   VERSION = "0.1.0"
 end

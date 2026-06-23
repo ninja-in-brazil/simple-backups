@@ -1,12 +1,12 @@
-# SimpleBackups
+# SimpleBackup
 
 **Simple backups for Omarchy. Opinionated defaults, zero ceremony.**
 
-Omarchy gives you a beautiful, modern, fully configured Linux system in one shot — the omakase menu, chef's choice. SimpleBackups applies the same spirit to backups: a tiny, plain-text tool that saves the dotfiles you care about without turning disaster recovery into another configuration hobby.
+Omarchy gives you a beautiful, modern, fully configured Linux system in one shot — the omakase menu, chef's choice. SimpleBackup applies the same spirit to backups: a tiny, plain-text tool that saves the dotfiles you care about without turning disaster recovery into another configuration hobby.
 
 No bespoke backup framework. No paradox of choice. Just `init`, `backup`, and `restore`.
 
-## Why SimpleBackups?
+## Why SimpleBackup?
 
 - **Curated from the start** — `simple-backup init` writes a sensible Omarchy-oriented `config.yml` you can edit in seconds.
 - **Plain text, terminal-first** — one YAML file lists what to save and where; everything else stays out of your way.
@@ -16,7 +16,7 @@ No bespoke backup framework. No paradox of choice. Just `init`, `backup`, and `r
 ## Installation
 
 ```bash
-gem install SimpleBackups
+gem install simple-backup
 ```
 
 This installs the `simple-backup` executable from RubyGems without building the
@@ -133,7 +133,7 @@ the public CLI.
 
 ## Release
 
-1. Confirm the version in `lib/simple_backups/version.rb`.
+1. Confirm the version in `lib/simple_backup/version.rb`.
 2. Run the test suite:
 
 ```bash
@@ -143,19 +143,19 @@ bundle exec rake test
 3. Build and inspect the gem:
 
 ```bash
-gem build SimpleBackups.gemspec
-gem specification ./SimpleBackups-$(ruby -Ilib -rsimple_backups/version -e 'print SimpleBackups::VERSION').gem files
+gem build simple-backup.gemspec
+gem specification ./simple-backup-$(ruby -Ilib -rsimple_backup/version -e 'print SimpleBackup::VERSION').gem files
 ```
 
 4. Push the gem to RubyGems:
 
 ```bash
-gem push SimpleBackups-$(ruby -Ilib -rsimple_backups/version -e 'print SimpleBackups::VERSION').gem
+gem push simple-backup-$(ruby -Ilib -rsimple_backup/version -e 'print SimpleBackup::VERSION').gem
 ```
 
 5. Verify the published install path:
 
 ```bash
-gem install SimpleBackups
+gem install simple-backup
 simple-backup --help
 ```
