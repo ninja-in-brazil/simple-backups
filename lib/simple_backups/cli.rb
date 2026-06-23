@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Castled
+module SimpleBackups
   class CLI
     COMMANDS = %w[init backup restore].freeze
 

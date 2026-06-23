@@ -1,12 +1,12 @@
-# Castled
+# SimpleBackups
 
 **Simple backups for Omarchy. Opinionated defaults, zero ceremony.**
 
-Omarchy gives you a beautiful, modern, fully configured Linux system in one shot — the omakase menu, chef's choice. Castled applies the same spirit to backups: a tiny, plain-text tool that saves the dotfiles you care about without turning disaster recovery into another configuration hobby.
+Omarchy gives you a beautiful, modern, fully configured Linux system in one shot — the omakase menu, chef's choice. SimpleBackups applies the same spirit to backups: a tiny, plain-text tool that saves the dotfiles you care about without turning disaster recovery into another configuration hobby.
 
 No bespoke backup framework. No paradox of choice. Just `init`, `backup`, and `restore`.
 
-## Why Castled?
+## Why SimpleBackups?
 
 - **Curated from the start** — `simple-backup init` writes a sensible Omarchy-oriented `config.yml` you can edit in seconds.
 - **Plain text, terminal-first** — one YAML file lists what to save and where; everything else stays out of your way.
@@ -16,11 +16,19 @@ No bespoke backup framework. No paradox of choice. Just `init`, `backup`, and `r
 ## Installation
 
 ```bash
-gem build castled.gemspec
-gem install castled-*.gem
+gem install SimpleBackups
 ```
 
-Or from the project directory:
+This installs the `simple-backup` executable from RubyGems without building the
+gem locally.
+
+To verify the CLI is available:
+
+```bash
+simple-backup --help
+```
+
+For local development from the project directory:
 
 ```bash
 bundle install
@@ -106,4 +114,48 @@ Dry run reports:
 ```bash
 bundle install
 bundle exec ruby -Ilib:test test/test_*.rb
+```
+
+## Contributing
+
+1. Fork the repository and create a focused branch.
+2. Run `bundle install`.
+3. Make the smallest change that solves the issue.
+4. Add or update tests when behavior changes.
+5. Run the test suite before opening a pull request:
+
+```bash
+bundle exec rake test
+```
+
+Keep the `simple-backup` command stable unless a change intentionally updates
+the public CLI.
+
+## Release
+
+1. Confirm the version in `lib/simple_backups/version.rb`.
+2. Run the test suite:
+
+```bash
+bundle exec rake test
+```
+
+3. Build and inspect the gem:
+
+```bash
+gem build SimpleBackups.gemspec
+gem specification ./SimpleBackups-$(ruby -Ilib -rsimple_backups/version -e 'print SimpleBackups::VERSION').gem files
+```
+
+4. Push the gem to RubyGems:
+
+```bash
+gem push SimpleBackups-$(ruby -Ilib -rsimple_backups/version -e 'print SimpleBackups::VERSION').gem
+```
+
+5. Verify the published install path:
+
+```bash
+gem install SimpleBackups
+simple-backup --help
 ```

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Castled — Simple backups for Omarchy</title>
+  <title>SimpleBackups — Simple backups for Omarchy</title>
   <meta name="description" content="A tiny, opinionated backup tool for Omarchy users. Initialize once, back up your dotfiles, restore when you need them.">
   <style>
     :root {
@@ -95,12 +95,12 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>Castled</h1>
+    <h1>SimpleBackups</h1>
     <p class="tagline">Simple backups for Omarchy. Opinionated defaults, zero ceremony.</p>
 
     <p class="pitch">
       Omarchy is <strong>beautiful, modern &amp; opinionated Linux</strong> — omakase computing,
-      chef's choice. Castled brings the same spirit to your personal dotfiles: one command to
+      chef's choice. SimpleBackups brings the same spirit to your personal dotfiles: one command to
       initialize, one to back up, one to restore. No backup framework to learn. Substitutions
       welcome.
     </p>
@@ -112,8 +112,8 @@
     </ul>
 
     <h2>Install</h2>
-    <pre><code><span class="cmd">gem build castled.gemspec</span>
-<span class="cmd">gem install castled-*.gem</span></code></pre>
+    <pre><code><span class="cmd">gem install SimpleBackups</span>
+<span class="cmd">simple-backup --help</span></code></pre>
 
     <h2>Initialize</h2>
     <pre><code><span class="cmd">simple-backup init</span>
@@ -141,7 +141,7 @@ destination: /run/media/leonid/250GB/backups</code></pre>
 0 9 * * * cd /path/to/config &amp;&amp; simple-backup backup</code></pre>
 
     <footer>
-      <a href="https://github.com/example/castled">GitHub</a>
+      <a href="https://github.com/ninja-in-brazil/simple-backups">GitHub</a>
       ·
       <a href="https://omarchy.org">Omarchy</a>
       ·
