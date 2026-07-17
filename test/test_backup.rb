@@ -11,15 +11,15 @@ class TestBackup < Minitest::Test
       dest_dir = File.join(dir, "backups")
       write_config(dir, backup_paths: [source], destination: dest_dir)
 
-      config = Castled::Config.load!
-      backup_path = Castled::Backup.new(config).run!
+      config = SimpleBackup::Config.load!
+      backup_path = SimpleBackup::Backup.new(config).run!
 
       assert_match(/\A#{Regexp.escape(dest_dir)}\/test_backup_\d{8}_\d{6}\z/, backup_path)
       backup = Pathname.new(backup_path)
       assert backup.join("data.txt").exist?
-      assert backup.join(Castled::Backup::MANIFEST_FILENAME).exist?
+      assert backup.join(SimpleBackup::Backup::MANIFEST_FILENAME).exist?
 
-      manifest = YAML.safe_load(backup.join(Castled::Backup::MANIFEST_FILENAME).read)
+      manifest = YAML.safe_load(backup.join(SimpleBackup::Backup::MANIFEST_FILENAME).read)
       assert_equal 1, manifest["entries"].size
       assert_equal source, manifest["entries"][0]["source"]
     end
@@ -35,8 +35,8 @@ class TestBackup < Minitest::Test
       dest_dir = File.join(dir, "backups")
       write_config(dir, backup_paths: [source], destination: dest_dir)
 
-      config = Castled::Config.load!
-      backup_path = Castled::Backup.new(config).run!
+      config = SimpleBackup::Config.load!
+      backup_path = SimpleBackup::Backup.new(config).run!
 
       backup = Pathname.new(backup_path)
       assert_equal "root", backup.join("data", "root.txt").read
@@ -51,11 +51,11 @@ class TestBackup < Minitest::Test
       dest_dir = File.join(dir, "backups")
       write_config(dir, backup_paths: [source], destination: dest_dir)
 
-      config = Castled::Config.load!
-      Castled::Backup.new(config).run!
+      config = SimpleBackup::Config.load!
+      SimpleBackup::Backup.new(config).run!
 
       File.write(source, "modified")
-      Castled::Backup.new(config).restore!(selection: "1")
+      SimpleBackup::Backup.new(config).restore!(selection: "1")
 
       assert_equal "original", File.read(source)
     end
@@ -68,12 +68,12 @@ class TestBackup < Minitest::Test
       dest_dir = File.join(dir, "backups")
       write_config(dir, backup_paths: [source], destination: dest_dir)
 
-      config = Castled::Config.load!
-      Castled::Backup.new(config).run!
+      config = SimpleBackup::Config.load!
+      SimpleBackup::Backup.new(config).run!
       File.write(source, "modified")
 
       output = StringIO.new
-      Castled::Backup.new(config).restore!(selection: "1", dry_run: true, io: output)
+      SimpleBackup::Backup.new(config).restore!(selection: "1", dry_run: true, io: output)
 
       assert_includes output.string, "Would overwrite: #{source}"
       assert_equal "modified", File.read(source)
@@ -87,12 +87,12 @@ class TestBackup < Minitest::Test
       dest_dir = File.join(dir, "backups")
       write_config(dir, backup_paths: [source], destination: dest_dir)
 
-      config = Castled::Config.load!
-      Castled::Backup.new(config).run!
+      config = SimpleBackup::Config.load!
+      SimpleBackup::Backup.new(config).run!
       File.write(source, "modified")
 
       output = StringIO.new
-      Castled::Backup.new(config).restore!(
+      SimpleBackup::Backup.new(config).restore!(
         selection: "1",
         dry_run: true,
         diff: true,
@@ -112,13 +112,13 @@ class TestBackup < Minitest::Test
       dest_dir = File.join(dir, "backups")
       write_config(dir, backup_name: "alpha", backup_paths: [source], destination: dest_dir)
 
-      config = Castled::Config.load!
-      backup = Castled::Backup.new(config)
+      config = SimpleBackup::Config.load!
+      backup = SimpleBackup::Backup.new(config)
       backup.run!
 
       write_config(dir, backup_name: "beta", backup_paths: [source], destination: dest_dir)
-      config_beta = Castled::Config.load!
-      Castled::Backup.new(config_beta).run!
+      config_beta = SimpleBackup::Config.load!
+      SimpleBackup::Backup.new(config_beta).run!
 
       backups = backup.list_backups
       assert_equal 1, backups.size

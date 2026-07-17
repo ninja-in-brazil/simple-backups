@@ -5,9 +5,9 @@ require "pathname"
 require "time"
 require "yaml"
 
-module Castled
+module SimpleBackup
   class Backup
-    MANIFEST_FILENAME = ".castled_manifest.yml"
+    MANIFEST_FILENAME = ".simple_backup_manifest.yml"
 
     class Error < StandardError; end
 
