@@ -1,14 +1,14 @@
-# SimpleBackup
+# Castled
 
 **Simple backups for Omarchy. Opinionated defaults, zero ceremony.**
 
-Omarchy gives you a beautiful, modern, fully configured Linux system in one shot — the omakase menu, chef's choice. SimpleBackup applies the same spirit to backups: a tiny, plain-text tool that saves the dotfiles you care about without turning disaster recovery into another configuration hobby.
+Omarchy gives you a beautiful, modern, fully configured Linux system in one shot — the omakase menu, chef's choice. Castled applies the same spirit to backups: a tiny, plain-text tool that saves the dotfiles you care about without turning disaster recovery into another configuration hobby.
 
 No bespoke backup framework. No paradox of choice. Just `init`, `backup`, and `restore`.
 
-## Why SimpleBackup?
+## Why Castled?
 
-- **Curated from the start** — `simple-backup init` writes a sensible Omarchy-oriented `config.yml` you can edit in seconds.
+- **Curated from the start** — `castled init` writes a sensible Omarchy-oriented `config.yml` you can edit in seconds.
 - **Plain text, terminal-first** — one YAML file lists what to save and where; everything else stays out of your way.
 - **Restore when it matters** — list backups, pick one, preview with `--dry-run`, diff with `--diff`.
 - **Substitutions welcome** — change paths, add folders, point `destination` at your USB drive. The defaults are a starting point, not a contract.
@@ -16,16 +16,16 @@ No bespoke backup framework. No paradox of choice. Just `init`, `backup`, and `r
 ## Installation
 
 ```bash
-gem install simple-backup
+gem install castled
 ```
 
-This installs the `simple-backup` executable from RubyGems without building the
+This installs the `castled` executable from RubyGems without building the
 gem locally.
 
 To verify the CLI is available:
 
 ```bash
-simple-backup --help
+castled --help
 ```
 
 For local development from the project directory:
@@ -42,7 +42,7 @@ bundle exec rake install
 Create a `config.yml` in the current directory:
 
 ```bash
-simple-backup init
+castled init
 ```
 
 Example `config.yml` (also what `init` generates):
@@ -65,7 +65,7 @@ Adjust `backup_paths` and `destination` to match your machine. Plug in an extern
 Copy configured paths to a timestamped folder under `destination`:
 
 ```bash
-simple-backup backup
+castled backup
 ```
 
 Backups are stored as `backup_name_YYYYMMDD_HHMMSS` (e.g. `omarchy_20260519_112300`).
@@ -81,7 +81,7 @@ crontab -e
 Example — backup every day at 9:00 AM:
 
 ```cron
-0 9 * * * cd /path/to/backup-config && /usr/bin/env simple-backup backup
+0 9 * * * cd /path/to/backup-config && /usr/bin/env castled backup
 ```
 
 Use full paths in cron jobs when possible; cron runs with a smaller environment than your interactive shell.
@@ -91,7 +91,7 @@ Use full paths in cron jobs when possible; cron runs with a smaller environment 
 List available backups and restore one interactively:
 
 ```bash
-simple-backup restore
+castled restore
 ```
 
 Restore copies files back to their original locations (overwriting existing files).
@@ -99,8 +99,8 @@ Restore copies files back to their original locations (overwriting existing file
 Preview without writing:
 
 ```bash
-simple-backup restore --dry-run
-simple-backup restore 1 --dry-run --diff
+castled restore --dry-run
+castled restore 1 --dry-run --diff
 ```
 
 Dry run reports:
@@ -128,7 +128,7 @@ bundle exec ruby -Ilib:test test/test_*.rb
 bundle exec rake test
 ```
 
-Keep the `simple-backup` command stable unless a change intentionally updates
+Keep the `castled` command stable unless a change intentionally updates
 the public CLI.
 
 ## Release
@@ -143,19 +143,19 @@ bundle exec rake test
 3. Build and inspect the gem:
 
 ```bash
-gem build simple-backup.gemspec
-gem specification ./simple-backup-$(ruby -Ilib -rsimple_backup/version -e 'print SimpleBackup::VERSION').gem files
+gem build castled.gemspec
+gem specification ./castled-$(ruby -Ilib -rsimple_backup/version -e 'print SimpleBackup::VERSION').gem files
 ```
 
 4. Push the gem to RubyGems:
 
 ```bash
-gem push simple-backup-$(ruby -Ilib -rsimple_backup/version -e 'print SimpleBackup::VERSION').gem
+gem push castled-$(ruby -Ilib -rsimple_backup/version -e 'print SimpleBackup::VERSION').gem
 ```
 
 5. Verify the published install path:
 
 ```bash
-gem install simple-backup
-simple-backup --help
+gem install castled
+castled --help
 ```

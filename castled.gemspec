@@ -3,14 +3,14 @@
 require_relative "lib/simple_backup/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "simple-backup"
+  spec.name          = "castled"
   spec.version       = SimpleBackup::VERSION
-  spec.authors       = ["SimpleBackup"]
+  spec.authors       = ["Castled"]
   spec.email         = ["noreply@example.com"]
 
-  spec.summary       = "Simple backups via simple-backup CLI"
+  spec.summary       = "Simple backups via castled CLI"
   spec.description   = "Initialize, backup, and restore files with a YAML config"
-  spec.homepage      = "https://github.com/ninja-in-brazil/simple-backups"
+  spec.homepage      = "https://github.com/Macron1-Automations/simple-backup"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.files = Dir.chdir(__dir__) do
     %w[
       README.md
-      simple-backup.gemspec
-      exe/simple-backup
+      castled.gemspec
+      exe/castled
       lib/simple_backup.rb
       lib/simple_backup/backup.rb
       lib/simple_backup/cli.rb
@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.bindir        = "exe"
-  spec.executables   = ["simple-backup"]
+  spec.executables   = ["castled"]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "rake", "~> 13.0"

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SimpleBackup — Simple backups for Omarchy</title>
+  <title>Castled — Simple backups for Omarchy</title>
   <meta name="description" content="A tiny, opinionated backup tool for Omarchy users. Initialize once, back up your dotfiles, restore when you need them.">
   <style>
     :root {
@@ -95,28 +95,28 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>SimpleBackup</h1>
+    <h1>Castled</h1>
     <p class="tagline">Simple backups for Omarchy. Opinionated defaults, zero ceremony.</p>
 
     <p class="pitch">
       Omarchy is <strong>beautiful, modern &amp; opinionated Linux</strong> — omakase computing,
-      chef's choice. SimpleBackup brings the same spirit to your personal dotfiles: one command to
+      chef's choice. Castled brings the same spirit to your personal dotfiles: one command to
       initialize, one to back up, one to restore. No backup framework to learn. Substitutions
       welcome.
     </p>
 
     <ul class="features">
-      <li>Curated <code>config.yml</code> from <code>simple-backup init</code></li>
+      <li>Curated <code>config.yml</code> from <code>castled init</code></li>
       <li>Timestamped copies to any destination (USB, NAS, local disk)</li>
       <li>Interactive restore with dry-run and diff preview</li>
     </ul>
 
     <h2>Install</h2>
-    <pre><code><span class="cmd">gem install simple-backup</span>
-<span class="cmd">simple-backup --help</span></code></pre>
+    <pre><code><span class="cmd">gem install castled</span>
+<span class="cmd">castled --help</span></code></pre>
 
     <h2>Initialize</h2>
-    <pre><code><span class="cmd">simple-backup init</span>
+    <pre><code><span class="cmd">castled init</span>
 <span class="comment"># creates config.yml with Omarchy-friendly defaults</span></code></pre>
 
     <h2>Example config</h2>
@@ -130,18 +130,18 @@ backup_paths:
 destination: /run/media/leonid/250GB/backups</code></pre>
 
     <h2>Backup &amp; restore</h2>
-    <pre><code><span class="cmd">simple-backup backup</span>
+    <pre><code><span class="cmd">castled backup</span>
 <span class="comment"># → omarchy_YYYYMMDD_HHMMSS/</span>
 
-<span class="cmd">simple-backup restore</span>
-<span class="cmd">simple-backup restore --dry-run --diff</span></code></pre>
+<span class="cmd">castled restore</span>
+<span class="cmd">castled restore --dry-run --diff</span></code></pre>
 
     <h2>Schedule (optional)</h2>
     <pre><code><span class="comment"># crontab — daily at 9:00</span>
-0 9 * * * cd /path/to/config &amp;&amp; simple-backup backup</code></pre>
+0 9 * * * cd /path/to/config &amp;&amp; castled backup</code></pre>
 
     <footer>
-      <a href="https://github.com/ninja-in-brazil/simple-backups">GitHub</a>
+      <a href="https://github.com/Macron1-Automations/simple-backup">GitHub</a>
       ·
       <a href="https://omarchy.org">Omarchy</a>
       ·

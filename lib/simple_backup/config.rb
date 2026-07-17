@@ -32,7 +32,7 @@ module SimpleBackup
 
     def self.load!(dir: Dir.pwd)
       path = Pathname.new(dir).join(CONFIG_FILENAME)
-      raise Error, "#{CONFIG_FILENAME} not found. Run `simple-backup init` first." unless path.exist?
+      raise Error, "#{CONFIG_FILENAME} not found. Run `castled init` first." unless path.exist?
 
       new(path)
     end

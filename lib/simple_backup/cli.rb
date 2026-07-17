@@ -83,7 +83,7 @@ module SimpleBackup
 
     def print_usage
       puts <<~USAGE
-        Usage: simple-backup <command>
+        Usage: castled <command>
 
         Commands:
           init     Create config.yml in the current directory
