@@ -173,7 +173,9 @@ module SimpleBackup
     def copy_entry(source, dest)
       if source.directory?
         FileUtils.mkdir_p(dest)
-        FileUtils.cp_r(source.join(".").to_s, dest.to_s)
+        source.children.each do |child|
+          FileUtils.cp_r(child.to_s, dest.to_s)
+        end
       else
         FileUtils.mkdir_p(dest.dirname)
         FileUtils.cp(source.to_s, dest.to_s)

@@ -25,6 +25,25 @@ class TestBackup < Minitest::Test
     end
   end
 
+  def test_run_copies_directory_contents
+    with_temp_dir do |dir|
+      source = File.join(dir, "data")
+      nested = File.join(source, "nested")
+      FileUtils.mkdir_p(nested)
+      File.write(File.join(source, "root.txt"), "root")
+      File.write(File.join(nested, "child.txt"), "child")
+      dest_dir = File.join(dir, "backups")
+      write_config(dir, backup_paths: [source], destination: dest_dir)
+
+      config = SimpleBackup::Config.load!
+      backup_path = SimpleBackup::Backup.new(config).run!
+
+      backup = Pathname.new(backup_path)
+      assert_equal "root", backup.join("data", "root.txt").read
+      assert_equal "child", backup.join("data", "nested", "child.txt").read
+    end
+  end
+
   def test_restore_copies_files_back
     with_temp_dir do |dir|
       source = File.join(dir, "data.txt")

@@ -3,6 +3,15 @@
 require "test_helper"
 
 class TestCLI < Minitest::Test
+  def test_gemspec_publishes_castled_executable
+    spec = Gem::Specification.load("castled.gemspec")
+
+    assert_equal "castled", spec.name
+    assert_equal ["castled"], spec.executables
+    assert File.exist?(File.join("exe", "castled"))
+    refute File.exist?(File.join("exe", "simple-backup"))
+  end
+
   def test_init_command
     with_temp_dir do
       assert_output(/Created/) { SimpleBackup::CLI.run(%w[init]) }
